@@ -19,8 +19,8 @@ public class Level1
             }
         }
 
-        for(int k = 0; k < time.length - 1; k++)
-            time[k + 1] = time[k + 1] - time[k];
+        for(int k = time.length - 1; k > 0; k--)
+            time[k] -= time[k-1];
 
         int total = 0;
         for(int j = 0; j < speed.length; j++)
