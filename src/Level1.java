@@ -13,8 +13,10 @@ public class Level1
 
         int filled = 0;
         for(int i = 0; i <= battalion.length / L; i += 2) {
-            cells[battalion[i + 1] - 1][battalion[i] - 1] = 1;
-            filled += 1;
+            if(cells[battalion[i + 1] - 1][battalion[i] - 1] == 0) {
+                cells[battalion[i + 1] - 1][battalion[i] - 1] = 1;
+                filled += 1;
+            }
         }
 
         int days = 1;
