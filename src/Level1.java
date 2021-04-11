@@ -4,14 +4,55 @@ public class Level1
 {
     public static int ConquestCampaign(int N, int M, int L, int [] battalion) {
 
-        int total_square = N * M;
+        int cells[][] = new int[M][N];
 
-        int filled = 0, i = 1;
-        while(filled < total_square) {
-            filled += L * i;
-            System.out.println(filled);
-            i++;
+        for(int i = 0; i < M; i++) {
+            for (int j = 0; j < N; j++)
+                cells[i][j] = 0;
         }
-        return (i-1);
+
+        int filled = 0;
+        for(int i = 0; i <= battalion.length / L; i += 2) {
+            cells[battalion[i + 1] - 1][battalion[i] - 1] = 1;
+            filled += 1;
+        }
+
+        int days = 1;
+        while(true) {
+            if(filled < M * N) {
+                days += 1;
+                for(int i = 0; i < M; i++)
+                    for(int j = 0; j < N; j++) {
+                        if (cells[i][j] == 1) {
+                            if (i != (M-1)) {
+                                if (cells[i+1][j] != 1) {
+                                    cells[i+1][j] = 1;
+                                    filled += 1;
+                                }
+                            }
+                            if(i != 0) {
+                                if (cells[i-1][j] != 1) {
+                                    cells[i-1][j] = 1;
+                                    filled += 1;
+                                }
+                            }
+                            if(j != (N-1)) {
+                                if (cells[i][j + 1] != 1) {
+                                    cells[i][j + 1] = 1;
+                                    filled += 1;
+                                }
+                            }
+                            if(j != 0) {
+                                if (cells[i][j - 1] != 1) {
+                                    cells[i][j - 1] = 1;
+                                    filled += 1;
+                                }
+                            }
+                        }
+                    }
+            } else break;
+        }
+        return days;
+
     }
 }
