@@ -18,7 +18,7 @@ public class Level1
 
         int[] impulse = new int[N];
         int k = N - 1;
-        for(int j = 0; j < Tele.length/2; j++) {
+        for(int j = 0; j <= Tele.length/2; j++) {
             impulse[j] = Tele[k];
             k--;
         }
