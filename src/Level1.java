@@ -9,7 +9,6 @@ public class Level1
             temp_arr[i] = ids[i];
 
         sorting(temp_arr);
-
         sorting(salary);
 
         HashMap<String, String> salaryTable = new HashMap<String, String>();
@@ -23,7 +22,7 @@ public class Level1
     }
 
     public static int[] sorting(int[] arr) {
-        for(int j = 0; j <= arr.length/2; j++) {
+        for(int j = 0; j <= arr.length/2 + 1; j++) {
             int max = arr[0];
             for(int i = 0; i < arr.length - 1 - j; i++) {
                 if(arr[i] >= arr[i + 1]) {
@@ -35,5 +34,5 @@ public class Level1
         }
         return arr;
     }
-    
+
 }
