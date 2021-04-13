@@ -2,33 +2,38 @@ import java.util.*;
 
 public class Level1
 {
-    public static int [] MadMax(int N, int [] Tele) {
+    public static int [] SynchronizingTables(int N, int [] ids, int [] salary) {
 
+        int[] temp_arr = new int[N];
+        for(int i = 0; i < ids.length; i++)
+            temp_arr[i] = ids[i];
 
-        for(int j = 0; j <= N/2; j++) {
-            int max = Tele[0];
-            for(int i = 0; i < N - 1 - j; i++) {
-                if(Tele[i] >= Tele[i + 1]) {
-                    max = Tele[i];
-                    Tele[i] = Tele[i + 1];
-                    Tele[i + 1] = max;
+        sorting(temp_arr);
+
+        sorting(salary);
+
+        HashMap<String, String> salaryTable = new HashMap<String, String>();
+        for(int i = 0; i < ids.length; i++)
+            salaryTable.put(String.valueOf(temp_arr[i]), String.valueOf(salary[i]));
+
+        for(int i = 0; i < ids.length; i++)
+            salary[i] = Integer.parseInt(salaryTable.get(String.valueOf(ids[i])));
+
+        return salary;
+    }
+
+    public static int[] sorting(int[] arr) {
+        for(int j = 0; j <= arr.length/2; j++) {
+            int max = arr[0];
+            for(int i = 0; i < arr.length - 1 - j; i++) {
+                if(arr[i] >= arr[i + 1]) {
+                    max = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = max;
                 }
             }
         }
-
-        int[] impulse = new int[N];
-        int k = N - 1;
-        for(int j = 0; j <= Tele.length/2; j++) {
-            impulse[j] = Tele[k];
-            k--;
-        }
-
-        int b = 0;
-        for(int a = N/2; a < Tele.length; a++) {
-            Tele[a] = impulse[b];
-            b++;
-        }
-
-        return Tele;
+        return arr;
     }
+    
 }
