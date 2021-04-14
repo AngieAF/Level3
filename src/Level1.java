@@ -17,7 +17,8 @@ public class Level1
                 else length += 1;
             }
 
-            String str = String.valueOf(length);
+            double roundDbl = Math.round(length * 100000.0)/100000.0;
+            String str = String.valueOf(roundDbl);
 
             ArrayList<Character> fin = new ArrayList<>();
 
@@ -28,7 +29,7 @@ public class Level1
             }
 
             String arr[] = new String[fin.size()];
-            
+
             for(int j =0; j < fin.size(); j++)
                 arr[j] = String.valueOf(fin.get(j));
 
