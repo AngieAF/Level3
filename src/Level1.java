@@ -2,41 +2,68 @@ import java.util.*;
 
 public class Level1
 {
-    public static String PatternUnlock(int N, int [] hits) {
-        double length = 0.0;
-        for(int i = 0; i < hits.length - 1; i++) {
-            if((hits[i] != (N - 1)) && (hits[i] == 6 && hits[i + 1] == 2) || (hits[i] == 2 && hits[i + 1] == 6))
-                length += 1.414213;
-            else if((hits[i] != (N - 1)) && (hits[i] == 9 && hits[i + 1] == 2) || (hits[i] == 2 && hits[i + 1] == 9))
-                length += 1.414213;
-            else if((hits[i] != (N - 1)) && (hits[i] == 4 && hits[i + 1] == 2) || (hits[i] == 2 && hits[i + 1] == 4))
-                length += 1.414213;
-            else if((hits[i] != (N - 1)) && (hits[i] == 7 && hits[i + 1] == 2) || (hits[i] == 2 && hits[i + 1] == 7))
-                length += 1.414213;
-            else length += 1;
-        }
-        
-        double roundDbl = Math.round(length * 100000.0)/100000.0;
-        String str = String.valueOf(roundDbl);
-
+    public static int [] WordSearch(int len, String s, String subs) {
         ArrayList<Character> fin = new ArrayList<>();
+        int end = len - 1;
+        int begin = 0;
+        int counter = 0;
+        int sub_length = end - begin;
 
-        for(int j = 0; j < str.length(); j++) {
-            if(str.charAt(j) == '.' || str.charAt(j) == '0')
-                continue;
-            else fin.add(str.charAt(j));
+        while(counter < s.length()) {
+
+            for(int i = end; i >= begin; i--){
+                if(s.charAt(i) == ' ') {
+                    end = i + 1;
+                    break;
+                }
+            }
+            for(int j = begin; j < end; j++)
+                fin.add(s.charAt(j));
+            fin.add('\n');
+
+            counter += sub_length;
+
+            begin = end;
+            end += len;
+
+            if(end + len > s.length()) {
+                end = s.length() - 1;
+            }
+
         }
 
-        String arr[] = new String[fin.size()];
-        for(int j =0; j < fin.size(); j++){
-            arr[j] = String.valueOf(fin.get(j));
+        ArrayList<Integer> res = new ArrayList<>();
+
+        ArrayList<Character> line = new ArrayList<>();
+        for(int i = 0; i < fin.size(); i++){
+            if(fin.get(i) != '\n') {
+                line.add(fin.get(i));
+            }
+            else {
+
+                StringBuilder result = new StringBuilder(line.size());
+                for (Character c : line) {
+                    result.append(c);
+                }
+                String output = result.toString();
+
+                String subs1 = subs + " ";
+                String subs2 = " " + subs + " ";
+                String subs3 = " " + subs + "\n";
+
+                if(output.contains(subs1) || output.contains(subs2) || output.contains(subs3)){
+                    res.add(1);
+                } else res.add(0);
+                line.clear();
+            }
         }
 
-        for(int i = 0; i < arr.length; i++)
-            System.out.println(arr[i]);
+        int [] result = new int [res.size()];
+        for(int j =0; j < res.size(); j++){
+            result[j] = res.get(j);
+        }
 
-        str = String.join("", arr);
+        return result;
 
-        return str;
     }
 }
