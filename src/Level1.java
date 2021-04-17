@@ -9,7 +9,13 @@ public class Level1
         int counter = 0;
         int sub_length = end - begin;
 
+        if(len > s.length())
+            len = s.length();
+        
         while(counter < s.length()) {
+            if(end + len > s.length()) {
+                end = s.length() - 1;
+            }
 
             for(int i = end; i >= begin; i--){
                 if(s.charAt(i) == ' ') {
