@@ -3,11 +3,6 @@ import java.util.*;
 public class Level1
 {
     public static int [] WordSearch(int len, String s, String subs) {
-        public static void main(String[] args) {
-            String s = "1) строка разбивается на набор строк через выравнивание по заданной ширине.";
-            WordSearch(12, s, "строк");
-        }
-        public static int [] WordSearch(int len, String s, String subs) {
 
             ArrayList<Character> fin = new ArrayList<>();
             int end = len;
