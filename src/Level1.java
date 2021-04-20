@@ -80,7 +80,7 @@ public class Level1
         printerTable.put("N", 25);
         printerTable.put("T", 16);
         printerTable.put("Z", 22);
-        printerTable.put("`", 22);
+        printerTable.put("`", 3);
         printerTable.put("f", 18);
         printerTable.put("l", 16);
         printerTable.put("r", 13);
