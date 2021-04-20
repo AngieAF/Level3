@@ -2,105 +2,115 @@ import java.util.*;
 
 public class Level1
 {
-    public static String TheRabbitsFoot(String s, boolean encode) {
+    public static int PrintingCosts(String Line) {
+        Map<String, Integer> printerTable
+                = new HashMap<String, Integer>();
 
-        ArrayList<Character> fin = new ArrayList<>();
-        int len = 0;
-        double root = 0.0;
-        int rowNumber = 0;
-        int columnNumber = 0;
+        printerTable.put(" ", 0);
+        printerTable.put("&", 24);
+        printerTable.put(",", 7);
+        printerTable.put("2", 22);
+        printerTable.put("8", 23);
+        printerTable.put(">", 10);
+        printerTable.put("D", 26);
+        printerTable.put("J", 18);
+        printerTable.put("P", 23);
+        printerTable.put("V", 19);
+        printerTable.put("\\", 10);
+        printerTable.put("b", 25);
+        printerTable.put("h", 21);
+        printerTable.put("n", 18);
+        printerTable.put("t", 17);
+        printerTable.put("z", 19);
+        printerTable.put("!", 9);
+        printerTable.put("'", 3);
+        printerTable.put("-", 7);
+        printerTable.put("3", 23);
+        printerTable.put("9", 26);
+        printerTable.put("?", 15);
+        printerTable.put("E", 26);
+        printerTable.put("K", 21);
+        printerTable.put("Q", 31);
+        printerTable.put("W", 26);
+        printerTable.put("]", 18);
+        printerTable.put("c", 17);
+        printerTable.put("i", 15);
+        printerTable.put("o", 20);
+        printerTable.put("u", 17);
+        printerTable.put("{", 18);
+        printerTable.put("\"", 6);
+        printerTable.put("(", 12);
+        printerTable.put(".", 4);
+        printerTable.put("4", 21);
+        printerTable.put(":", 8);
+        printerTable.put("@", 32);
+        printerTable.put("F", 20);
+        printerTable.put("L", 16);
+        printerTable.put("R", 28);
+        printerTable.put("X", 18);
+        printerTable.put("^", 7);
+        printerTable.put("d", 25);
+        printerTable.put("j", 20);
+        printerTable.put("p", 25);
+        printerTable.put("v", 13);
+        printerTable.put("|", 12);
+        printerTable.put("#", 24);
+        printerTable.put(")", 12);
+        printerTable.put("/", 10);
+        printerTable.put("5", 27);
+        printerTable.put(";", 11);
+        printerTable.put("A", 24);
+        printerTable.put("G", 25);
+        printerTable.put("M", 28);
+        printerTable.put("S", 25);
+        printerTable.put("Y", 14);
+        printerTable.put("_", 8);
+        printerTable.put("e", 23);
+        printerTable.put("k", 21);
+        printerTable.put("q", 25);
+        printerTable.put("w", 19);
+        printerTable.put("}", 18);
+        printerTable.put("$", 29);
+        printerTable.put("*", 17);
+        printerTable.put("0", 22);
+        printerTable.put("6", 26);
+        printerTable.put("<", 10);
+        printerTable.put("B", 29);
+        printerTable.put("H", 25);
+        printerTable.put("N", 25);
+        printerTable.put("T", 16);
+        printerTable.put("Z", 22);
+        printerTable.put("`", 22);
+        printerTable.put("f", 18);
+        printerTable.put("l", 16);
+        printerTable.put("r", 13);
+        printerTable.put("x", 13);
+        printerTable.put("~", 9);
+        printerTable.put("%", 22);
+        printerTable.put("+", 13);
+        printerTable.put("1", 19);
+        printerTable.put("7", 16);
+        printerTable.put("=", 14);
+        printerTable.put("C", 20);
+        printerTable.put("I", 18);
+        printerTable.put("O", 26);
+        printerTable.put("U", 23);
+        printerTable.put("[", 18);
+        printerTable.put("a", 23);
+        printerTable.put("g", 30);
+        printerTable.put("m", 22);
+        printerTable.put("s", 21);
+        printerTable.put("y", 24);
 
+        int ink = 0;
 
-        if (encode) {
-            for (int i = 0; i < s.length(); i++) {
-                if (s.charAt(i) != ' ')
-                    fin.add(s.charAt(i));
+        for(int i = 0; i < Line.length(); i++) {
+            if(printerTable.containsKey(Character.toString(Line.charAt(i)))) {
+                ink += printerTable.get(Character.toString(Line.charAt(i)));
             }
-            System.out.println(fin);
-
-            len = fin.size();
-            root = Math.sqrt(len);
-
-            String str = String.valueOf(root);
-            System.out.println(str);
-
-            rowNumber = Integer.parseInt(String.valueOf(str.charAt(0)));
-            System.out.println(rowNumber);
-
-            for (int i = 0; i < str.length(); i++) {
-                if (str.charAt(i) == '.')
-                    columnNumber = Integer.parseInt(String.valueOf(str.charAt(i + 1)));
-            }
-            System.out.println(columnNumber);
-
-            while (rowNumber * columnNumber < len) {
-                if (rowNumber > columnNumber)
-                    columnNumber += 1;
-                else rowNumber += 1;
-            }
-
-            System.out.println("columns: " + columnNumber + " rows: " + rowNumber);
-
-            ArrayList<Character> res = new ArrayList<>();
-            int counter = 0, line = 0;
-
-            while (counter < fin.size()) {
-                for (int j = line; j <= rowNumber + line; j++) {
-                    if (j < fin.size()) {
-                        if (j == rowNumber + line) {
-                            res.add('\n');
-                            line = j;
-                            break;
-                        } else res.add(fin.get(j));
-                    } else {
-                        line = fin.size();
-                        break;
-                    }
-                }
-                counter = line;
-            }
-
-            System.out.println(res);
-
-            String finStr = new String();
-            counter = 0;
-
-            int flag = 0;
-            while (counter < rowNumber) {
-                for (int i = counter; i < res.size(); i += (columnNumber + 1)) {
-                    finStr += res.get(i);
-
-                }
-                counter++;
-                if(counter < rowNumber)
-                    finStr += ' ';
-            }
-
-            System.out.println(finStr);
-            return finStr;
-
+            else ink += 23;
         }
-        else {
-            String finStr = new String();
-            int counter = 0, space_count = 0;
-            for(int i = 0; i < s.length(); i++)
-                if(s.charAt(i) == ' ') space_count += 1;
-
-
-            while(counter <= space_count) {
-                finStr += s.charAt(counter);
-                for(int i = counter; i < s.length(); i++) {
-                    if(s.charAt(i) == ' ') {
-                        if(s.charAt(i + counter + 1) == ' ') break;
-                        finStr += s.charAt(i + counter + 1);
-                    }
-
-                }
-                counter++;
-            }
-
-            System.out.println(finStr);
-            return finStr;
-        }
+        System.out.println(ink);
+        return ink;
     }
 }
