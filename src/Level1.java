@@ -11,7 +11,7 @@ public class Level1
         int columnNumber = 0;
 
 
-        if (!encode) {
+        if (encode) {
             for (int i = 0; i < s.length(); i++) {
                 if (s.charAt(i) != ' ')
                     fin.add(s.charAt(i));
