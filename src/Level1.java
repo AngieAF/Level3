@@ -65,12 +65,15 @@ public class Level1
             String finStr = new String();
             counter = 0;
 
+            int flag = 0;
             while (counter < rowNumber) {
                 for (int i = counter; i < res.size(); i += (columnNumber + 1)) {
                     finStr += res.get(i);
+
                 }
-                finStr += ' ';
                 counter++;
+                if(counter < rowNumber)
+                    finStr += ' ';
             }
 
             System.out.println(finStr);
