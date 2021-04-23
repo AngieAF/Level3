@@ -17,14 +17,10 @@ public class Level1
         for(int i = 0; i < s2.length(); i++)
             s2_reversed += s2.charAt(s2.length() - 1 - i);
 
-        System.out.println(s1_reversed);
-        System.out.println(s2_reversed);
-
         int carry = 0;
 
         for(int i = 0; i < s2.length(); i++) {
             int sub = (int)(s1_reversed.charAt(i)) - (int)(s2_reversed.charAt(i)) - carry;
-            System.out.println(sub);
 
             if(sub < 0) {
                 carry = 1;
@@ -34,12 +30,9 @@ public class Level1
 
             res += String.valueOf(sub);
         }
-
-        System.out.println("res: " + res);
 
         for(int i = s2_reversed.length(); i < s1.length(); i++) {
             int sub = (s1_reversed.charAt(i) - '0') - carry;
-            System.out.println(sub);
 
             if(sub < 0) {
                 carry = 1;
@@ -49,14 +42,10 @@ public class Level1
 
             res += String.valueOf(sub);
         }
-
-        System.out.println("res: " + res);
 
         String res_reversed = "";
         for(int i = 0; i < res.length(); i++)
             res_reversed += res.charAt(res.length() - 1 - i);
-
-        System.out.println(res_reversed);
 
         return res_reversed;
     }
