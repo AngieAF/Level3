@@ -8,16 +8,17 @@ public class Level1
             s1 = t;
             s1 = s2;
             s2 = t;
+        } else if(s1.length() == s2.length()) {
+            for(int i = 0; i < s1.length(); i++) {
+                if(s1.charAt(i) < s2.charAt(i)) {
+                    String t = "";
+                    s1 = t;
+                    s1 = s2;
+                    s2 = t;
+                }
+            }
         }
 
-        for (int i = 0; i < s1.length(); i++)
-            if (s1.charAt(i) < s2.charAt(i)) {
-                String t = "";
-                s1 = t;
-                s1 = s2;
-                s2 = t;
-            }
-        
         String s1_reversed = "", s2_reversed = "";
         String res = "";
         for(int i = 0; i < s1.length(); i++)
