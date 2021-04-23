@@ -57,6 +57,10 @@ public class Level1
         for(int i = 0; i < res.length(); i++)
             res_reversed += res.charAt(res.length() - 1 - i);
 
+        if(Integer.parseInt(res_reversed) == 0) {
+            res_reversed = "0";
+        }
+
         return res_reversed;
     }
 }
