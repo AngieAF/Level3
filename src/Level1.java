@@ -23,9 +23,9 @@ public class Level1
         for(int i = 0; i < Votes.length; i++)
             sum += Votes[i];
 
-        int percentage = 0;
+        double percentage = 0;
 
-        percentage = arr_copy[arr_copy.length - 1] * 100 / sum;
+        percentage = arr_copy[arr_copy.length - 1] * 100.0 / sum;
 
         if(counter > 1) {
             res = "no winner";
@@ -51,4 +51,5 @@ public class Level1
         }
         return arr;
     }
+
 }
