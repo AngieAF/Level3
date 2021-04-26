@@ -30,7 +30,7 @@ public class Level1
         if(counter > 1) {
             res = "no winner";
         } else {
-            if(percentage >= 50)
+            if(percentage > 50)
                 res = "majority winner " + element;
             else res = "minority winner " + element;
         }
