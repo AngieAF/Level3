@@ -2,65 +2,53 @@ import java.util.*;
 
 public class Level1
 {
-    public static String BigMinus(String s1, String s2) {
-        if(s1.length() < s2.length()) {
-            String t = "";
-            t = s1;
-            s1 = s2;
-            s2 = t;
-        } else if(s1.length() == s2.length()) {
-            for(int i = 0; i < s1.length(); i++) {
-                if(s1.charAt(i) < s2.charAt(i)) {
-                    String t = "";
-                    s1 = t;
-                    s1 = s2;
-                    s2 = t;
+    public static String MassVote(int N, int[] Votes) {
+        String res = "";
+        int[] arr_copy = new int[Votes.length];
+
+        for(int i = 0; i < arr_copy.length; i++)
+            arr_copy[i] = Votes[i];
+
+        sorting(arr_copy);
+
+        int counter = 0, element = -1;
+        for(int i = 0; i < Votes.length; i++) {
+            if (Votes[i] == arr_copy[arr_copy.length - 1]) {
+                counter++;
+                element = i + 1;
+            }
+        }
+
+        int sum = 0;
+        for(int i = 0; i < Votes.length; i++)
+            sum += Votes[i];
+
+        int percentage = 0;
+
+        percentage = arr_copy[arr_copy.length - 1] * 100 / sum;
+
+        if(counter > 1) {
+            res = "no winner";
+        } else {
+            if(percentage >= 50)
+                res = "majority winner " + element;
+            else res = "minority winner " + element;
+        }
+
+        return res;
+    }
+
+    public static int[] sorting(int[] arr) {
+        for(int j = 0; j <= arr.length/2 + 1; j++) {
+            int max = arr[0];
+            for(int i = 0; i < arr.length - 1 - j; i++) {
+                if(arr[i] >= arr[i + 1]) {
+                    max = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = max;
                 }
             }
         }
-
-        String s1_reversed = "", s2_reversed = "";
-        String res = "";
-        for(int i = 0; i < s1.length(); i++)
-            s1_reversed += s1.charAt(s1.length() - 1 - i);
-
-        for(int i = 0; i < s2.length(); i++)
-            s2_reversed += s2.charAt(s2.length() - 1 - i);
-
-        int carry = 0;
-
-        for(int i = 0; i < s2.length(); i++) {
-            int sub = (int)(s1_reversed.charAt(i)) - (int)(s2_reversed.charAt(i)) - carry;
-
-            if(sub < 0) {
-                carry = 1;
-                sub += 10;
-            }
-            else carry = 0;
-
-            res += String.valueOf(sub);
-        }
-
-        for(int i = s2_reversed.length(); i < s1.length(); i++) {
-            int sub = (s1_reversed.charAt(i) - '0') - carry;
-
-            if(sub < 0) {
-                carry = 1;
-                sub += 10;
-            }
-            else carry = 0;
-
-            res += String.valueOf(sub);
-        }
-
-        String res_reversed = "";
-        for(int i = 0; i < res.length(); i++)
-            res_reversed += res.charAt(res.length() - 1 - i);
-
-        if(Integer.parseInt(res_reversed) == 0) {
-            res_reversed = "0";
-        }
-
-        return res_reversed;
+        return arr;
     }
 }
