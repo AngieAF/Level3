@@ -2,54 +2,35 @@ import java.util.*;
 
 public class Level1
 {
-    public static String MassVote(int N, int[] Votes) {
-        String res = "";
-        int[] arr_copy = new int[Votes.length];
-
-        for(int i = 0; i < arr_copy.length; i++)
-            arr_copy[i] = Votes[i];
-
-        sorting(arr_copy);
-
-        int counter = 0, element = -1;
-        for(int i = 0; i < Votes.length; i++) {
-            if (Votes[i] == arr_copy[arr_copy.length - 1]) {
-                counter++;
-                element = i + 1;
-            }
-        }
-
-        int sum = 0;
-        for(int i = 0; i < Votes.length; i++)
-            sum += Votes[i];
-
-        double percentage = 0;
-
-        percentage = arr_copy[arr_copy.length - 1] * 100.0 / sum;
-
-        if(counter > 1) {
-            res = "no winner";
-        } else {
-            if(percentage > 50)
-                res = "majority winner " + element;
-            else res = "minority winner " + element;
-        }
-
-        return res;
-    }
-
-    public static int[] sorting(int[] arr) {
-        for(int j = 0; j <= arr.length/2 + 1; j++) {
-            int max = arr[0];
-            for(int i = 0; i < arr.length - 1 - j; i++) {
-                if(arr[i] >= arr[i + 1]) {
-                    max = arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = max;
+    public static int [] UFO(int N, int [] data, boolean octal) {
+        int[] fin = new int[data.length];
+        if (octal) {
+            for (int i = 0; i < data.length; i++) {
+                int k = 0, digit = 0, decimal = 0;
+                while (data[i] != 0) {
+                    int temp = data[i] % 10;
+                    digit = temp * (int) Math.pow(8, k);
+                    decimal += digit;
+                    data[i] = data[i] / 10;
+                    k++;
                 }
+                fin[i] = decimal;
             }
-        }
-        return arr;
-    }
+            return fin;
 
+        } else {
+            for (int i = 0; i < data.length; i++) {
+                int k = 0, digit = 0, decimal = 0;
+                while (data[i] != 0) {
+                    int temp = data[i] % 10;
+                    digit = temp * (int) Math.pow(16, k);
+                    decimal += digit;
+                    data[i] = data[i] / 10;
+                    k++;
+                }
+                fin[i] = decimal;
+            }
+            return fin;
+        }
+    }
 }
