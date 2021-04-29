@@ -2,35 +2,21 @@ import java.util.*;
 
 public class Level1
 {
-    public static int [] UFO(int N, int [] data, boolean octal) {
-        int[] fin = new int[data.length];
-        if (octal) {
-            for (int i = 0; i < data.length; i++) {
-                int k = 0, digit = 0, decimal = 0;
-                while (data[i] != 0) {
-                    int temp = data[i] % 10;
-                    digit = temp * (int) Math.pow(8, k);
-                    decimal += digit;
-                    data[i] = data[i] / 10;
-                    k++;
-                }
-                fin[i] = decimal;
-            }
-            return fin;
+    public static int Unmanned(int L, int N, int [][] track) {
+        int time = 0, delta = 0;
+        for(int i = 0; i < track.length; i++) {
+            for(int j = 0; j < track[i].length; j += 3) {
+                time += track[i][j] - delta;
 
-        } else {
-            for (int i = 0; i < data.length; i++) {
-                int k = 0, digit = 0, decimal = 0;
-                while (data[i] != 0) {
-                    int temp = data[i] % 10;
-                    digit = temp * (int) Math.pow(16, k);
-                    decimal += digit;
-                    data[i] = data[i] / 10;
-                    k++;
-                }
-                fin[i] = decimal;
+                if(time < track[i][j + 1])
+                    time += track[i][j + 1] - track[i][j];
+
+                delta = track[i][j];
             }
-            return fin;
         }
+        if(delta < L)
+            time += (L - delta);
+
+        return time;
     }
 }
