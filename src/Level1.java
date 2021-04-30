@@ -15,7 +15,7 @@ public class Level1
                 if(time < track[i][j + 1])
                     time += track[i][j + 1] - track[i][j];
                 else {
-                    if(time % (track[i][j+1] + track[i][j + 2]) != 0)
+                    if(time % (track[i][j+1] + track[i][j + 2]) < track[i][j + 1])
                         time += time % (track[i][j+1] + track[i][j + 2]);
                 }
 
