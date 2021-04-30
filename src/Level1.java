@@ -6,6 +6,10 @@ public class Level1
         int time = 0, delta = 0;
         for(int i = 0; i < track.length; i++) {
             for(int j = 0; j < track[i].length; j += 3) {
+                if(L < track[i][j]) {
+                    time = L;
+                    return time;
+                }
                 time += track[i][j] - delta;
 
                 if(time < track[i][j + 1])
