@@ -2,29 +2,32 @@ import java.util.*;
 
 public class Level1
 {
-    public static int Unmanned(int L, int N, int [][] track) {
-        int time = 0, delta = 0;
-        for(int i = 0; i < track.length; i++) {
-            for(int j = 0; j < track[i].length; j += 3) {
-                if(L < track[i][j]) {
-                    time = L;
-                    return time;
+    public static boolean TankRush(int H1, int W1, String S1, int H2, int W2, String S2) {
+        boolean flag = false, pos = false;
+        int j = 0, counter = 0;
+        for(int i = 0; i < S1.length(); i++) {
+            if(counter == H2 * W2) break;
+            if(S2.charAt(j) == ' ' && flag == true) {
+                j++;
+                i = i + W2;
+                pos = true;
+            } else {
+                if(S2.charAt(j) == S1.charAt(i)) {
+                    flag = true;
+                    j++;
+                    counter++;
                 }
-                time += track[i][j] - delta;
-
-                if(time < track[i][j + 1])
-                    time += track[i][j + 1] - track[i][j];
                 else {
-                    if(time % (track[i][j+1] + track[i][j + 2]) < track[i][j + 1])
-                        time += time % (track[i][j+1] + track[i][j + 2]);
+                    flag = false;
+                    j = 0;
+                    if(pos == true) {
+                        i = i - W2 - 1;
+                        pos = false;
+                    }
+                    counter = 0;
                 }
-
-                delta = track[i][j];
             }
         }
-        if(delta < L)
-            time += (L - delta);
-
-        return time;
+        return flag;
     }
 }
