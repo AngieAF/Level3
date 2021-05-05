@@ -19,9 +19,8 @@ public class Level1
                 if(counter % W2 == 0)
                     old_pos = i;
             } else {
-                if(flag == true) {
+                if(flag == true)
                     i = old_pos;
-                }
                 flag = false;
                 old_pos = 0;
                 j = 0;
