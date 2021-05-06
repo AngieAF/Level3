@@ -6,7 +6,7 @@ public class Level1
         boolean flag = false;
         int j = 0, counter = 0, old_pos = 0;
         for (int i = 0; i < S1.length(); i++) {
-            if(counter == (S2.length() - 1)) break;
+            if(counter == W2) break;
 
             if (S2.charAt(j) == ' ' && flag == true) {
                 i = i + (W1 - W2 + 1);
