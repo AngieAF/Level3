@@ -16,7 +16,7 @@ public class Level1
                 j++;
                 flag = true;
                 counter++;
-                if(counter % W2 == 0)
+                if(counter <= W2)
                     old_pos = i;
             } else {
                 if(flag == true)
