@@ -2,35 +2,43 @@ import java.util.*;
 
 public class Level1
 {
-    public static int MaximumDiscount(int N, int [] price) {
-        boolean sorted = false;
-        int temp = 0;
-        while(!sorted) {
-            sorted = true;
-            for (int i = 0; i < price.length - 1; i++) {
-                if (price[i] > price[i + 1]) {
-                    temp = price[i];
-                    price[i] = price[i + 1];
-                    price[i + 1] = temp;
-                    sorted = false;
+    public static boolean LineAnalysis(String line) {
+        boolean flag = false;
+        int begin = 0;
+        ArrayList <Character> patternArr = new ArrayList<Character>();
+
+        if(line.charAt(0) == '*') {
+            flag = true;
+            for(int i = 1; i < line.length(); i++) {
+                if(line.charAt(i) != '*') {
+                    patternArr.add(line.charAt(i));
+                } else {
+                    begin = i;
+                    break;
                 }
             }
-        }
+            int k = 0;
+            for(int j = begin + 1; j < line.length(); j++) {
+                if(k < patternArr.size()) {
+                    if(line.charAt(j) == patternArr.get(k)) {
+                        flag = true;
+                        k++;
+                    }
+                    else  {
+                        flag = false;
+                        break;
+                    }
+                } else {
+                    if(line.charAt(j) != '*') {
+                        flag = false;
+                        break;
+                    }
+                    begin = j;
+                    k = 0;
+                }
+            }
+        } else flag = false;
 
-        int t = 0;
-        for(int i = N - 1; i >= N/2 ; i--) {
-            t = price[price.length - 1 - i];
-            price[price.length - 1 - i] = price[i];
-            price[i] = t;
-        }
-
-        int total = 0, sum = 0;
-        for(int i = 0; i < N; i++) {
-            sum += price[i];
-            if((i + 1) % 3 != 0)
-                total += price[i];
-        }
-
-        return (sum - total);
+        return flag;
     }
 }
