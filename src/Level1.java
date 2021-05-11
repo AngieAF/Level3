@@ -8,7 +8,7 @@ public class Level1
         while(!sorted) {
             sorted = true;
             for (int i = 0; i < price.length - 1; i++) {
-                if (price[i] >= price[i + 1]) {
+                if (price[i] > price[i + 1]) {
                     temp = price[i];
                     price[i] = price[i + 1];
                     price[i + 1] = temp;
