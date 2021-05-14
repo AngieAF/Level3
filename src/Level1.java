@@ -46,8 +46,8 @@ public class Level1
         boolean sorted = false;
 
         while(!sorted) {
+            sorted = true;
             for(int k = 1; k < fin.length - 2; k += 2) {
-                sorted = true;
                 if(Integer.parseInt(fin[k]) < Integer.parseInt(fin[k + 2])) {
                     num = fin[k];
                     item = fin[k - 1];
