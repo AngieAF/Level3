@@ -4,7 +4,6 @@ public class Level1
 {
     public static String [] ShopOLAP(int N, String [] items) {
 
-
         HashMap <String, String> soldGoods = new HashMap<>();
 
         int temp = 0;
@@ -60,6 +59,32 @@ public class Level1
                 }
             }
         }
+
+        String temp_key = "", temp_value = "";
+        for(int k = 1;  k < fin.length - 2; k += 2) {
+            if(Integer.parseInt(fin[k]) == Integer.parseInt(fin[k + 2])) {
+                for(int s = 0; s < fin[k - 1].length(); j++) {
+                    if(fin[k - 1].charAt(s) != fin[k + 1].charAt(s)) {
+                        if(Character.isDigit(fin[k - 1].charAt(s)) && Character.isDigit(fin[k + 1].charAt(s))) {
+                            if(Integer.parseInt(String.valueOf(fin[k - 1].charAt(s))) >
+                                    Integer.parseInt(String.valueOf(fin[k + 1].charAt(s)))) {
+                                temp_key = fin[k - 1];
+                                fin[k - 1] = fin[k + 1];
+                                fin[k + 1] = temp_key;
+                                temp_value = fin[k];
+                                fin[k] = fin[k + 2];
+                                fin[k + 2] = temp_value;
+                                break;
+                            } else if(Integer.parseInt(String.valueOf(fin[k - 1].charAt(s))) <
+                                    Integer.parseInt(String.valueOf(fin[k + 1].charAt(s)))) break;
+
+                        } else break;
+                    }
+                    s++;
+                }
+            }
+        }
+
         String [] fin_arr = new String[fin.length / 2];
         int s = 0;
         for(int k = 0; k < fin.length; k += 2) {
