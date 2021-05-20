@@ -2,96 +2,80 @@ import java.util.*;
 
 public class Level1
 {
-    public static String [] ShopOLAP(int N, String [] items) {
+    private static String str = "";
+    private static ArrayList<String> string_state = new ArrayList<String>();
+    private static boolean undo_flag = false;
+    private static int undo_counter = 0;
+    private static String last_action = "";
 
-        HashMap <String, String> soldGoods = new HashMap<>();
+    public static String BastShoe(String command) {
 
-        int temp = 0;
-        for(int i = 0; i < N; i++) {
-            String temp_key = "", temp_value = "";
-            for(int j = 0; j < items[i].length(); j++) {
-                if(items[i].charAt(j) != ' ') {
-                    temp_key += items[i].charAt(j);
-                } else {
-                    for(int k = j + 1; k <= items[i].length() - 1; k++)
-                        temp_value += items[i].charAt(k);
-                    break;
-                }
+        if(command.charAt(0) == '1') {
+            for(int i = 2; i < command.length(); i++)
+                str += command.charAt(i);
+            if(undo_flag == true) {
+                String temp = "";
+                undo_counter = 0;
+                temp = string_state.get(string_state.size() - 1);
+                string_state.clear();
+                string_state.add(temp);
             }
-            if(soldGoods.containsKey(temp_key)) {
-                temp = Integer.parseInt(soldGoods.get(temp_key)) + Integer.parseInt(temp_value);
-                soldGoods.put(temp_key, String.valueOf(temp));
+            string_state.add(str);
+            last_action = "";
+            last_action = command;
+            undo_flag = false;
+            return str;
+
+        } if(command.charAt(0) == '2') {
+
+            String temp_str = "";
+            String N = "";
+            for(int i = 2; i < command.length(); i++) {
+                N += command.charAt(i);
             }
-            else soldGoods.put(temp_key, temp_value);
-        }
-
-        String [] fin = new String[soldGoods.size() * 2];
-
-        int i = 0;
-
-        for (String key : soldGoods.keySet()) {
-            fin[i] = key;
-            i += 2;
-            if(i == (soldGoods.size() * 2 - 1)) break;
-        }
-
-        int j = 1;
-        for (String value : soldGoods.values()) {
-            fin[j] = value;
-            j += 2;
-            if(j == (soldGoods.size() * 2)) break;
-        }
-
-        String num = "", item = "";
-        boolean sorted = false;
-
-        while(!sorted) {
-            sorted = true;
-            for(int k = 1; k < fin.length - 2; k += 2) {
-                if(Integer.parseInt(fin[k]) < Integer.parseInt(fin[k + 2])) {
-                    num = fin[k];
-                    item = fin[k - 1];
-                    fin[k] = fin[k + 2];
-                    fin[k - 1] = fin[k + 1];
-                    fin[k + 2] = num;
-                    fin[k + 1] = item;
-                    sorted = false;
-                }
+            if(Integer.parseInt(N) >= str.length()) {
+                str = "";
+                return str;
             }
-        }
-
-        String temp_key = "", temp_value = "";
-        for(int k = 1;  k < fin.length - 2; k += 2) {
-            if(Integer.parseInt(fin[k]) == Integer.parseInt(fin[k + 2])) {
-                for(int s = 0; s < fin[k - 1].length(); j++) {
-                    if(fin[k - 1].charAt(s) != fin[k + 1].charAt(s)) {
-                        if(Character.isDigit(fin[k - 1].charAt(s)) && Character.isDigit(fin[k + 1].charAt(s))) {
-                            if(Integer.parseInt(String.valueOf(fin[k - 1].charAt(s))) >
-                                    Integer.parseInt(String.valueOf(fin[k + 1].charAt(s)))) {
-                                temp_key = fin[k - 1];
-                                fin[k - 1] = fin[k + 1];
-                                fin[k + 1] = temp_key;
-                                temp_value = fin[k];
-                                fin[k] = fin[k + 2];
-                                fin[k + 2] = temp_value;
-                                break;
-                            } else if(Integer.parseInt(String.valueOf(fin[k - 1].charAt(s))) <
-                                    Integer.parseInt(String.valueOf(fin[k + 1].charAt(s)))) break;
-
-                        } else break;
-                    }
-                    s++;
-                }
+            for(int i = 0; i < str.length() - Integer.parseInt(String.valueOf(command.charAt(2))); i++) {
+                temp_str += str.charAt(i);
             }
-        }
+            if(undo_flag == true) {
+                String temp = "";
+                undo_counter = 0;
+                temp = str;
+                string_state.clear();
+                string_state.add(temp);
+            }
+            str = "";
+            str = temp_str;
+            string_state.add(str);
+            last_action = "";
+            last_action = command;
+            undo_flag = false;
+            return str;
 
-        String [] fin_arr = new String[fin.length / 2];
-        int s = 0;
-        for(int k = 0; k < fin.length; k += 2) {
-            fin_arr[s] = fin[k] + " " + fin[k + 1];
-            s++;
-        }
+        } if(command.charAt(0) == '3') {
+            String temp_str = "";
+            if(Integer.parseInt(String.valueOf(command.charAt(2))) >= str.length()) {
+                return temp_str;
+            }
+            temp_str = String.valueOf(str.charAt(Integer.parseInt(String.valueOf(command.charAt(2)))));
+            return temp_str;
 
-        return fin_arr;
+        } if(command.charAt(0) == '4') {
+            undo_counter++;
+            if(string_state.size() < undo_counter + 1) undo_counter--;
+            str = string_state.get(string_state.size() - 1 - undo_counter);
+            undo_flag = true;
+            return str;
+
+        } if(command.charAt(0) == '5') {
+            if(undo_counter != 0) undo_counter--;
+            str = string_state.get(string_state.size() - 1 - undo_counter);
+            return str;
+        }
+        return str;
     }
+
 }
