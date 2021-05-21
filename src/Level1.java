@@ -16,7 +16,8 @@ public class Level1
             if(undo_flag == true) {
                 String temp = "";
                 undo_counter = 0;
-                temp = string_state.get(string_state.size() - 1);
+                if(string_state.isEmpty()) temp = "";
+                else temp = string_state.get(string_state.size() - 1);
                 string_state.clear();
                 string_state.add(temp);
             }
@@ -64,10 +65,13 @@ public class Level1
             return temp_str;
 
         } if(command.charAt(0) == '4') {
+            undo_flag = true;
+            if(string_state.isEmpty()) {
+                return str;
+            }
             undo_counter++;
             if(string_state.size() < undo_counter + 1) undo_counter--;
             str = string_state.get(string_state.size() - 1 - undo_counter);
-            undo_flag = true;
             return str;
 
         } if(command.charAt(0) == '5') {
@@ -77,5 +81,4 @@ public class Level1
         }
         return str;
     }
-
 }
