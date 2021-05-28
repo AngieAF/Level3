@@ -2,93 +2,45 @@ import java.util.*;
 
 public class Level1
 {
-    private static String str = "";
-    private static ArrayList<String> string_state = new ArrayList<String>();
-    private static boolean undo_flag = false;
-    private static int undo_counter = 0;
-    private static String undo_str = "";
-
-    public static String BastShoe(String command) {
-
-        if(command.charAt(0) == '1') {
-            if(string_state.isEmpty())
-                string_state.add("");
-
-            for(int i = 2; i < command.length(); i++)
-                str += command.charAt(i);
-
-            if(undo_flag == true) {
-                String temp = "";
-                undo_counter = 0;
-                temp = undo_str;
-                string_state.clear();
-                string_state.add(temp);
-                undo_flag = false;
-            }
-            string_state.add(str);
-            System.out.println(string_state);
-            return str;
-
-        } if(command.charAt(0) == '2') {
-            if(string_state.isEmpty()) string_state.add("");
+        public static String BiggerGreater(String input) {
             String temp_str = "";
-            String N = "";
-            for(int i = 2; i < command.length(); i++) {
-                N += command.charAt(i);
+            String initial_str = "", min_str = "";
+            int known_counter = 0;
+            int dif = 0, min_dif = 1000;
+            boolean change_flag = false;
+
+            for(int i = 0; i < input.length(); i++) {
+                char c = ' ';
+                temp_str = "";
+                initial_str = "";
+                c = input.charAt(i);
+
+                for(known_counter = 0; known_counter < i; known_counter++)
+                    initial_str += input.charAt(known_counter);
+
+                for(int j = i + 1; j < input.length(); j++) {
+                    temp_str = initial_str;
+                    temp_str += input.charAt(j);
+                    dif = input.charAt(j) - input.charAt(i);
+                    if(dif > 0 && dif < min_dif) {
+                        dif = min_dif;
+                        change_flag = true;
+                    }
+                    for(int k = i; k < input.length(); k++) {
+                        if(k != i) {
+                            if(k == j) temp_str += c;
+                            else temp_str += input.charAt(k);
+                        }
+                    }
+                    if(change_flag == true) {
+                        min_str = "";
+                        min_str = temp_str;
+                        change_flag = false;
+                    }
+                }
             }
-            if(Integer.parseInt(N) >= str.length()) {
-                str = "";
-                return str;
-            }
-            for(int i = 0; i < str.length() - Integer.parseInt(String.valueOf(command.charAt(2))); i++) {
-                temp_str += str.charAt(i);
-            }
-            if(undo_flag == true) {
-                String temp = "";
-                undo_counter = 0;
-                temp = str;
-                string_state.clear();
-                string_state.add(temp);
-            }
-            str = "";
-            str = temp_str;
-            string_state.add(str);
-            undo_flag = false;
-            System.out.println(string_state);
-            return str;
 
-        } if(command.charAt(0) == '3') {
-            if(string_state.isEmpty())
-                string_state.add("");
-
-            String temp_str = "";
-            if(Integer.parseInt(String.valueOf(command.charAt(2))) >= str.length()) {
-                return temp_str;
-            }
-            temp_str = String.valueOf(str.charAt(Integer.parseInt(String.valueOf(command.charAt(2)))));
-            return temp_str;
-
-        } if(command.charAt(0) == '4') {
-            if(string_state.isEmpty())
-                string_state.add("");
-
-            undo_flag = true;
-            undo_counter++;
-            if(string_state.size() < undo_counter + 1) undo_counter--;
-            str = string_state.get(string_state.size() - 1 - undo_counter);
-            System.out.println(string_state);
-            undo_str = str;
-            return str;
-
-        } if(command.charAt(0) == '5') {
-            if(string_state.isEmpty())
-                string_state.add("");
-
-            if(undo_counter != 0) undo_counter--;
-            str = string_state.get(string_state.size() - 1 - undo_counter);
-            System.out.println(string_state);
-            return str;
+            return min_str;
         }
-        return str;
-    }
+
 }
