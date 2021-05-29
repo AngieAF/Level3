@@ -2,45 +2,46 @@ import java.util.*;
 
 public class Level1
 {
-        public static String BiggerGreater(String input) {
-            String temp_str = "";
-            String initial_str = "", min_str = "";
-            int known_counter = 0;
-            int dif = 0, min_dif = 1000;
-            boolean change_flag = false;
+    public static String BiggerGreater(String input) {
+        char dec_element = ' ';
+        int ind = 0, dif = 0, swap_ind = 0;
+        String temp_str = "", res = "";
+        char sym1 = ' ', sym2 = ' ';
 
-            for(int i = 0; i < input.length(); i++) {
-                char c = ' ';
-                temp_str = "";
-                initial_str = "";
-                c = input.charAt(i);
-
-                for(known_counter = 0; known_counter < i; known_counter++)
-                    initial_str += input.charAt(known_counter);
-
-                for(int j = i + 1; j < input.length(); j++) {
-                    temp_str = initial_str;
-                    temp_str += input.charAt(j);
-                    dif = input.charAt(j) - input.charAt(i);
-                    if(dif > 0 && dif < min_dif) {
-                        dif = min_dif;
-                        change_flag = true;
-                    }
-                    for(int k = i; k < input.length(); k++) {
-                        if(k != i) {
-                            if(k == j) temp_str += c;
-                            else temp_str += input.charAt(k);
-                        }
-                    }
-                    if(change_flag == true) {
-                        min_str = "";
-                        min_str = temp_str;
-                        change_flag = false;
-                    }
-                }
+        for(int i = input.length() - 1; i > 0; i--) {
+            sym1 = input.charAt(i - 1);
+            sym2 = input.charAt(i);
+            if (sym1 <= sym2) {
+                dec_element = input.charAt(i - 1);
+                ind = i - 1;
+                break;
             }
-
-            return min_str;
         }
 
+        dif = input.charAt(ind + 1) - input.charAt(ind);
+        for(int j = ind; j < input.length() - 1; j++) {
+            if((input.charAt(j + 1) - dec_element) <= dif && (input.charAt(j + 1) - dec_element) > 0) {
+                dif = input.charAt(j + 1) - dec_element;
+                swap_ind = j + 1;
+            }
+        }
+        if(dif <= 0) return "";
+
+        for(int i = 0; i < input.length(); i++) {
+            if(i == ind) {
+                temp_str += input.charAt(swap_ind);
+            } else if(i == swap_ind) {
+                temp_str += input.charAt(ind);
+            } else temp_str += input.charAt(i);
+        }
+
+        for(int j = 0; j <= ind; j++)
+            res += temp_str.charAt(j);
+
+        for(int i = temp_str.length() - 1; i > ind; i--) {
+            res += temp_str.charAt(i);
+        }
+
+        return res;
+    }
 }
