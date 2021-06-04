@@ -2,36 +2,51 @@ import java.util.*;
 
 public class Level1
 {
-    public static boolean SherlockValidString(String s) {
-        boolean flag = true;
-        LinkedHashMap<Character, Integer> symbols = new LinkedHashMap();
-        int num = 0;
-        for(int i = 0; i < s.length(); i++)
-            symbols.put(s.charAt(i), num);
-
-        for(int i = 0; i < s.length(); i++) {
-            num = symbols.get(s.charAt(i)) + 1;
-            symbols.put(s.charAt(i), num);
-        }
-
-        ArrayList<Integer> count_arr = new ArrayList<>();
-        for(Map.Entry<Character, Integer> entry : symbols.entrySet()) {
-            count_arr.add(entry.getValue());
-        }
-
-        int counter = count_arr.get(0);
-        int temp = 0, temp_counter = 0;
-        for(int i = 0; i < count_arr.size(); i++) {
-            if(count_arr.get(i) != counter) {
-                if(temp_counter == 0) {
-                    temp = count_arr.get(i) - 1;
-                    temp_counter++;
-                    if (temp != counter && temp != 0)
-                        flag = false;
-                } else flag = false;
+    public static String[] TreeOfLife(int H, int W, int N, String [] tree) {
+        int[][] matrix = new int[3][4];
+        for(int i = 0; i < tree.length; i++) {
+            for(int j = 0; j < tree[i].length(); j++) {
+                if(tree[i].charAt(j) == '+')
+                    matrix[i][j] = 1;
+                else matrix[i][j] = 0;
             }
         }
-        ;
-        return flag;
+
+        int year = 1;
+        while(year <= N){
+            for(int i = 0; i < matrix.length; i++) {
+                for(int j = 0; j < matrix[i].length; j++) {
+                    matrix[i][j] += 1;
+                }
+            }
+
+            if(year % 2 == 0) {
+                for(int i = 0; i < matrix.length; i++) {
+                    for(int j = 0; j < matrix[i].length; j++) {
+                        if(matrix[i][j] >= 3) {
+                            matrix[i][j] = 0;
+                            if(j > 0 && matrix[i][j - 1] < 3) matrix[i][j - 1] = 0;
+                            if(j < W - 1 && matrix[i][j + 1] < 3) matrix[i][j + 1] = 0;
+                            if(i > 0 && matrix[i - 1][j] < 3) matrix[i - 1][j] = 0;
+                            if(i < H - 1 && matrix[i + 1][j] < 3) matrix[i + 1][j] = 0;
+                        }
+                    }
+                }
+            }
+            year++;
+        }
+
+        String[] fin_arr = new String[matrix[0].length];
+
+        for(int i = 0; i < matrix.length; i++) {
+            for(int j = 0; j < matrix[i].length; j++) {
+                if(matrix[i][j] == 0)
+                    fin_arr[i] += '.';
+                else fin_arr[i] += '+';
+            }
+        }
+
+        return fin_arr;
     }
+
 }
