@@ -37,6 +37,8 @@ public class Level1
         }
 
         String[] fin_arr = new String[matrix[0].length];
+        for(int i = 0; i < fin_arr.length; i++)
+            fin_arr[i] = "";
 
         for(int i = 0; i < matrix.length; i++) {
             for(int j = 0; j < matrix[i].length; j++) {
