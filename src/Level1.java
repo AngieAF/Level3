@@ -3,7 +3,7 @@ import java.util.*;
 public class Level1
 {
     public static String[] TreeOfLife(int H, int W, int N, String [] tree) {
-        int[][] matrix = new int[3][4];
+        int[][] matrix = new int[H][W];
         for(int i = 0; i < tree.length; i++) {
             for(int j = 0; j < tree[i].length(); j++) {
                 if(tree[i].charAt(j) == '+')
@@ -36,7 +36,7 @@ public class Level1
             year++;
         }
 
-        String[] fin_arr = new String[matrix[0].length];
+        String[] fin_arr = new String[matrix.length];
         for(int i = 0; i < fin_arr.length; i++)
             fin_arr[i] = "";
 
