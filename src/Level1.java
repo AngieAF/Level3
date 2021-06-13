@@ -25,7 +25,7 @@ public class Level1
         ArrayList<ArrayList<Integer>> rotatedLayers = new ArrayList<>();
 
         int offset = 0;
-        if(T == 1) offset = 1;
+        if(T < layers.get(0).size()) offset = T;
         else offset = layers.get(0).size() % T;
 
 
