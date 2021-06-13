@@ -31,10 +31,10 @@ public class Level1
 
         for(int layer = 0; layer < layers.size(); layer++) {
             ArrayList<Integer> el = new ArrayList<>();
-            for(int s = offset; s < layers.get(layer).size(); s++) {
+            for(int s = layers.get(layer).size() - offset; s < layers.get(layer).size(); s++) {
                 el.add(layers.get(layer).get(s));
             }
-            for(int s = 0; s < offset; s++) {
+            for(int s = 0; s < layers.get(layer).size() - offset; s++) {
                 el.add(layers.get(layer).get(s));
             }
             rotatedLayers.add(el);
