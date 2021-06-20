@@ -2,30 +2,31 @@ import java.util.*;
 
 public class Level1
 {
-    public static boolean white_walkers(String village) {
-        int c = 0, counter = 0;
-        char num = ' ';
-        int num_pos = 0;
-        for(int s = 0; s < village.length(); s++) {
-            if(Character.isDigit(village.charAt(s))) {
-                c++;
-                if(c > 1) {
-                    if((Integer.parseInt(String.valueOf(num)) +
-                            Integer.parseInt(String.valueOf(village.charAt(s))) == 10)) {
-                        for(int i = s - 1; i > num_pos; i--) {
-                            if(village.charAt(i) == '=')
-                                counter++;
-                        }
-                        if(counter != 3) return false;
-                        counter = 0;
-                    }
-                }
-                num = village.charAt(s);
-                num_pos = s;
-            }
+    public static boolean Football(int F[], int N) {
+        int[] arr = new int[F.length];
+        for(int i = 0; i < arr.length; i++)
+            arr[i] = F[i];
 
+        int temp = 0;
+        for(int i = 0; i < arr.length; i++) {
+            temp = arr[i];
+            for(int j = i + 1; j < arr.length; j++) {
+                arr[i] = arr[j];
+                arr[j] = temp;
+                if(Arranger(arr))
+                    return true;
+                for(int k = 0; k < arr.length; k++)
+                    arr[k] = F[k];
+            }
         }
-        if(c  <= 1) return false;
+        return false;
+
+    }
+    public static boolean Arranger(int[] arr) {
+        for(int i = 0; i < arr.length - 1; i++) {
+            if(arr[i] > arr[i + 1])
+                return false;
+        }
         return true;
     }
 }
