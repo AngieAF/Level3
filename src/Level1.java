@@ -2,31 +2,26 @@ import java.util.*;
 
 public class Level1
 {
-    public static boolean Football(int F[], int N) {
-        int[] arr = new int[F.length];
-        for(int i = 0; i < arr.length; i++)
-            arr[i] = F[i];
+    public static String Keymaker(int k) {
+        int[] doors = new int[k];
+        for(int i = 0; i < k; i++)
+            doors[i] = 0;
 
-        int temp = 0;
-        for(int i = 0; i < arr.length; i++) {
-            temp = arr[i];
-            for(int j = i + 1; j < arr.length; j++) {
-                arr[i] = arr[j];
-                arr[j] = temp;
-                if(Arranger(arr))
-                    return true;
-                for(int k = 0; k < arr.length; k++)
-                    arr[k] = F[k];
+        int j = 0; int step = 0;
+        for(int i = 1; i <= k; i++) {
+            step = i; j = i - 1;
+            while(j < k) {
+                if(doors[j] == 0)
+                    doors[j] = 1;
+                else doors[j] = 0;
+                j += step;
             }
         }
-        return false;
 
-    }
-    public static boolean Arranger(int[] arr) {
-        for(int i = 0; i < arr.length - 1; i++) {
-            if(arr[i] > arr[i + 1])
-                return false;
-        }
-        return true;
+        String res = "";
+        for(int i = 0; i < doors.length; i++)
+            res += String.valueOf(doors[i]);
+
+        return res;
     }
 }
