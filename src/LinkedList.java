@@ -88,7 +88,7 @@ public class LinkedList {
                 if(head == tail) {
                     head = null;
                     tail = null;
-                    break;
+                    return;
                 }
                 if(node == head) head = node.next;
                 else if(node == tail) {
@@ -105,6 +105,7 @@ public class LinkedList {
     public void clear() {
         // код очистки всего списка
         this.head = null;
+        this.tail = null;
 
     }
 
