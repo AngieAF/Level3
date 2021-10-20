@@ -56,8 +56,14 @@ public class LinkedList {
     public boolean remove(int _value) {
         // код удаления одного узла по заданному значению
         Node node = this.head, prev = null;
+
         while (node != null) {
             if (node.value == _value) {
+                if(head == tail) {
+                    head = null;
+                    tail = null;
+                    return true;
+                }
                 if(node == head) head = node.next;
                 else if(node == tail) {
                     tail = prev;
@@ -79,6 +85,11 @@ public class LinkedList {
         Node node = this.head, prev = null;
         while (node != null) {
             if (node.value == _value) {
+                if(head == tail) {
+                    head = null;
+                    tail = null;
+                    break;
+                }
                 if(node == head) head = node.next;
                 else if(node == tail) {
                     tail = prev;
