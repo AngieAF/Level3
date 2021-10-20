@@ -122,17 +122,25 @@ public class LinkedList {
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         // код вставки узла после заданного
-        if(_nodeAfter == null || head == null) {
+        if(head == null) {
+            head = _nodeToInsert;
+            tail = _nodeToInsert;
+            return;
+        } else if(_nodeAfter == null) {         // если _nodeAfter = null, добавьте новый элемент первым в списке
             _nodeToInsert.next = head;
             head = _nodeToInsert;
+            return;
         }
-        else {
+        else if(_nodeAfter.next == null){
+            tail.next = _nodeToInsert;
+            tail = _nodeToInsert;
+        } else {
             _nodeToInsert.next = _nodeAfter.next;
             _nodeAfter.next = _nodeToInsert;
         }
-        // если _nodeAfter = null,
-        // добавьте новый элемент первым в списке
     }
+
+
 
     public void printLinkedList(LinkedList linkedlist) {
         Node node = this.head;
@@ -144,45 +152,25 @@ public class LinkedList {
 
     public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
-        Node head, tail = null;
-        for(int i = 0; i < 7; i++){
+        Node head = null, tail = null;
+        /*for(int i = 0; i < 7; i++){
             Node element = new Node(i);
             linkedList.addInTail(element);
-        }
-        //linkedList.addInTail(third);
-        //linkedList.addInTail(fifth);
-        //System.out.println(linkedList.findAll(2));
-        //System.out.println(linkedList.count());
+        }*/
+        Node element = new Node(1);
+        linkedList.insertAfter(null, element);
         linkedList.printLinkedList(linkedList);
-        //linkedList.clear();
-        //System.out.println("\n" + linkedList);
-        //Node _nodeToInsert = new Node(0);
-        //linkedList.insertAfter(fifth, _nodeToInsert);
-        //linkedList.printLinkedList(linkedList);
-        //System.out.println("\n");
-        //System.out.println(linkedList.tail.value);
+        System.out.println("\n");
+        Node element2 = new Node(2);
+        linkedList.insertAfter(element, element2);
+        linkedList.printLinkedList(linkedList);
         linkedList.remove(2);
         System.out.println("\n");
         System.out.println(linkedList);
         linkedList.printLinkedList(linkedList);
-        //System.out.println("\n head " + linkedList.head.value);
-        System.out.println("\n");
+        /*System.out.println("\n");
         linkedList.remove(3);
-        linkedList.printLinkedList(linkedList);
-        //linkedList.remove(0);
-        //linkedList.printLinkedList(linkedList);
-        //System.out.println("\n head " + linkedList.head.value);
-        //linkedList.remove(5);
-        //linkedList.printLinkedList(linkedList);
-        //System.out.println("\n head " + linkedList.head.value);
-        //linkedList.remove(2);
-        //System.out.println("Linkedlist ");
-        //linkedList.printLinkedList(linkedList);
-        //linkedList.removeAll(2);
-        //linkedList.printLinkedList(linkedList);
-        //System.out.println("\n");
-        //linkedList.addInTail(fifth);
-        //linkedList.printLinkedList(linkedList);
+        linkedList.printLinkedList(linkedList);*/
     }
 }
 
