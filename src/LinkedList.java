@@ -122,7 +122,7 @@ public class LinkedList {
 
     public void insertAfter(Node _nodeAfter, Node _nodeToInsert) {
         // код вставки узла после заданного
-        if(_nodeAfter == null) {
+        if(_nodeAfter == null || head == null) {
             _nodeToInsert.next = head;
             head = _nodeToInsert;
         }
