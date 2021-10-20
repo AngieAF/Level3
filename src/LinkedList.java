@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class LinkedList {
 
     public Node head;
@@ -17,6 +16,19 @@ public class LinkedList {
         else
             this.tail.next = item;
         this.tail = item;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        Node element = head;
+        for(int i = 0; i < count(); i++) {
+            str += element.value;
+            if(i < count() - 1) str += ", ";
+            element = element.next;
+        }
+
+        return "[" + str + "]";
     }
 
     public Node find(int value) {
@@ -46,20 +58,20 @@ public class LinkedList {
         Node node = this.head, prev = null;
         while (node != null) {
             if (node.value == _value) {
-                if(node == head) {
-                    head = node.next;
-                    return true;
-                } else {
-                    prev.next = node.next;
-                    return true;
+                if(node == head) head = node.next;
+                else if(node == tail) {
+                    tail = prev;
+                    tail.next = null;
                 }
+                else prev.next = node.next;
+                return true;
             }
             else {
                 prev = node;
                 node = node.next;
             }
         }
-        return true; // если узел был удалён
+        return false;
     }
 
     public void removeAll(int _value) {
@@ -67,17 +79,15 @@ public class LinkedList {
         Node node = this.head, prev = null;
         while (node != null) {
             if (node.value == _value) {
-                if(node == head) {
-                    head = node.next;
-                } else {
-                    prev.next = node.next;
+                if(node == head) head = node.next;
+                else if(node == tail) {
+                    tail = prev;
+                    tail.next = null;
                 }
-                node = node.next;
+                else prev.next = node.next;
             }
-            else {
-                prev = node;
-                node = node.next;
-            }
+            else prev = node;
+            node = node.next;
         }
     }
 
@@ -120,33 +130,48 @@ public class LinkedList {
         }
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         LinkedList linkedList = new LinkedList();
         Node head, tail = null;
-        Node first = new Node(5);
-        Node second = new Node(10);
-        Node third = new Node(2);
-        Node fourth = new Node(2);
-        Node fifth = new Node(11);
-        linkedList.addInTail(first);
-        linkedList.addInTail(second);
-        linkedList.addInTail(third);
-        linkedList.addInTail(fourth);
+        for(int i = 0; i < 7; i++){
+            Node element = new Node(i);
+            linkedList.addInTail(element);
+        }
+        //linkedList.addInTail(third);
+        //linkedList.addInTail(fifth);
         //System.out.println(linkedList.findAll(2));
         //System.out.println(linkedList.count());
         linkedList.printLinkedList(linkedList);
         //linkedList.clear();
         //System.out.println("\n" + linkedList);
-        Node _nodeToInsert = new Node(0);
-        linkedList.insertAfter(fifth, _nodeToInsert);
-        linkedList.printLinkedList(linkedList);
+        //Node _nodeToInsert = new Node(0);
+        //linkedList.insertAfter(fifth, _nodeToInsert);
+        //linkedList.printLinkedList(linkedList);
+        //System.out.println("\n");
+        //System.out.println(linkedList.tail.value);
+        linkedList.remove(2);
         System.out.println("\n");
-        linkedList.remove(5);
+        System.out.println(linkedList);
         linkedList.printLinkedList(linkedList);
+        //System.out.println("\n head " + linkedList.head.value);
         System.out.println("\n");
-        linkedList.removeAll(2);
+        linkedList.remove(3);
         linkedList.printLinkedList(linkedList);
-    }*/
+        //linkedList.remove(0);
+        //linkedList.printLinkedList(linkedList);
+        //System.out.println("\n head " + linkedList.head.value);
+        //linkedList.remove(5);
+        //linkedList.printLinkedList(linkedList);
+        //System.out.println("\n head " + linkedList.head.value);
+        //linkedList.remove(2);
+        //System.out.println("Linkedlist ");
+        //linkedList.printLinkedList(linkedList);
+        //linkedList.removeAll(2);
+        //linkedList.printLinkedList(linkedList);
+        //System.out.println("\n");
+        //linkedList.addInTail(fifth);
+        //linkedList.printLinkedList(linkedList);
+    }
 }
 
 class Node {
