@@ -163,9 +163,10 @@ public class LinkedList2
             _nodeToInsert.prev = null;
             return;
         }
-        else if(_nodeAfter.next == null){
-            tail.next = _nodeToInsert;
+        else if(_nodeAfter.next == null) { // the element is added in tail
+            this.tail.next = _nodeToInsert;
             _nodeToInsert.prev = tail;
+            this.tail = _nodeToInsert;
 
         } else {
             _nodeToInsert.next = _nodeAfter.next;
