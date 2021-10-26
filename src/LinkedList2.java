@@ -78,7 +78,7 @@ public class LinkedList2
                 }
                 if (node == head) { // remove first element
                     head = node.next;
-                    node.prev = null;
+                    head.prev = null;
                 }
                 else if (node == tail) { // remove last element
                     tail = prev;
@@ -175,7 +175,7 @@ public class LinkedList2
         }
 
     }
-    
+
 }
 
 class Node
