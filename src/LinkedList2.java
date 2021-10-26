@@ -112,7 +112,7 @@ public class LinkedList2
                 }
                 if(node == head) {
                     head = node.next;
-                    node.prev = null;
+                    head.prev = null;
                 }
                 else if(node == tail) {
                     tail = prev;
