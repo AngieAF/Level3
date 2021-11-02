@@ -21,6 +21,7 @@ public class DynArray<T>
             temp_array[i] = array[i];
         }
         array = temp_array;
+        capacity = new_capacity;
     }
 
     public T getItem(int index)
@@ -74,6 +75,7 @@ public class DynArray<T>
 
     /*public static void main(String[] args) {
         DynArray dynArr = new DynArray<Integer>(Integer.class);
+        System.out.println(dynArr.capacity);
         dynArr.append(2);
         dynArr.append(10);
 
