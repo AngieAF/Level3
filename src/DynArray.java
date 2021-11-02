@@ -61,13 +61,13 @@ public class DynArray<T>
     public void remove(int index)
     {
         if (count > 0) {
-            for (int i = index; i < count - 1; i ++) {
+            for (int i = index; i <= count - 1; i++) {
                 array[i] = array[i + 1];
             }
             count--;
         }
 
-        if ((count * 3) / 2 < 16) {
+        if ((count * 3) / 2 > 16) {
             makeArray(16);
         }
     }
