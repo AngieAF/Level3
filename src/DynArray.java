@@ -72,7 +72,7 @@ public class DynArray<T>
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         DynArray dynArr = new DynArray<Integer>(Integer.class);
         dynArr.append(2);
         dynArr.append(10);
@@ -80,6 +80,6 @@ public class DynArray<T>
         dynArr.remove(1);
         System.out.println(dynArr.getItem(0));
 
-    }
+    }*/
 
 }
