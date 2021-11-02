@@ -47,16 +47,18 @@ public class DynArray<T>
 
     public void insert(T itm, int index)
     {
-        if (count == array.length) {
-            makeArray(2 * array.length);
-        }
+        if (index >= 0 && index <= array.length - 1) {
+            if (count == array.length) {
+                makeArray(2 * array.length);
+            }
 
-        for (int i = count - 1; i >= index; i--) {
-            array[i + 1] = array[i];
-        }
+            for (int i = count - 1; i >= index; i--) {
+                array[i + 1] = array[i];
+            }
 
-        array[index] = itm;
-        count++;
+            array[index] = itm;
+            count++;
+        }
     }
 
     public void remove(int index)
