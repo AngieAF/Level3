@@ -69,28 +69,25 @@ public class DynArray<T>
 
     public void remove(int index)
     {
-        if (index < 0 || index > count) {
+        if (index < 0 || index > count || count <= 0) {
             throw new ArrayIndexOutOfBoundsException();
         }
-            if(index >= 0 && index <= count - 1) {
-                if (count > 0) {
-                    for (int i = index; i < count - 1; i++) {
-                        array[i] = array[i + 1];
-                    }
-                    array[count - 1] = null;
-                    count--;
-
-                    int new_capacity = 0;
-                    if (count <= (capacity / 2)) {
-                        new_capacity = capacity * 2 / 3;
-                        if (new_capacity < 16) {
-                            new_capacity = 16;
-                        }
-                        makeArray(new_capacity);
-                    }
-                }
-
+        if (count > 0) {
+            for (int i = index; i < count - 1; i++) {
+                array[i] = array[i + 1];
             }
+            array[count - 1] = null;
+            count--;
+
+            int new_capacity = 0;
+            if (count <= (capacity / 2)) {
+                new_capacity = capacity * 2 / 3;
+                if (new_capacity < 16) {
+                    new_capacity = 16;
+                }
+                makeArray(new_capacity);
+            }
+        }
     }
 
     public String arrayPrint() {
