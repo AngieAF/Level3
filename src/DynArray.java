@@ -26,12 +26,11 @@ public class DynArray<T>
 
     public T getItem(int index)
     {
-        try {
-            return array[index];
+        if (index < 0 || index > count) {
+            throw new ArrayIndexOutOfBoundsException();
         }
-         catch (IndexOutOfBoundsException e) {
-         }
-        return null;
+
+        return array[index];
     }
 
     public void append(T itm)
@@ -47,10 +46,13 @@ public class DynArray<T>
 
     public void insert(T itm, int index)
     {
+        if (index < 0 || index > count) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
         if (index == count) {
             append(itm);
         } else {
-            try {
+
                 if (count == array.length) {
                     makeArray(2 * array.length);
                 }
@@ -61,16 +63,15 @@ public class DynArray<T>
 
                 array[index] = itm;
                 count++;
-            } catch (IndexOutOfBoundsException e) {
-                //System.out.println(e);
-            }
         }
 
     }
 
     public void remove(int index)
     {
-        try {
+        if (index < 0 || index > count) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
             if(index >= 0 && index <= count - 1) {
                 if (count > 0) {
                     for (int i = index; i < count - 1; i++) {
@@ -90,9 +91,6 @@ public class DynArray<T>
                 }
 
             }
-        } catch (IndexOutOfBoundsException e) {
-
-        }
     }
 
     public String arrayPrint() {
