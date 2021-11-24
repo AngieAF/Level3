@@ -1,3 +1,5 @@
+//import java.util.*;
+
 public class Deque<T>
 {
     Node<T> head;
@@ -59,6 +61,13 @@ public class Deque<T>
             return null;
         }
 
+        if (head == tail) {
+            value = head.value;
+            head = null;
+            tail = null;
+            return value;
+        }
+
         while (node != null) {
             if (node == tail) {
                 value = tail.value;
@@ -90,7 +99,27 @@ public class Deque<T>
             System.out.println(node.value);
             node = node.next;
         }
-    }*/
+    }
+
+    public static void main(String[] args) {
+        Deque<Integer> deque = new Deque<>();
+        deque.addTail(1);
+        //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
+        deque.addTail(2);
+        //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
+        //System.out.println("Size " + deque.size());
+        //deque.printDeque();
+
+        deque.addFront(10);
+        //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
+        //deque.printDeque();
+        //System.out.println("Size " + deque.size());
+
+        deque.removeTail();
+        deque.printDeque();
+        System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
+        System.out.println("Size " + deque.size());
+    } */
 
     private class Node<T> {
         private T value;
