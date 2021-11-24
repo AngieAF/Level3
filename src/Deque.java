@@ -2,8 +2,8 @@
 
 public class Deque<T>
 {
-    Node<T> head;
-    Node<T> tail;
+    private Node<T> head;
+    private Node<T> tail;
 
     public Deque()
     {
@@ -12,12 +12,29 @@ public class Deque<T>
         tail = null;
     }
 
+    public T getHead() {
+        if (head == null) {
+            return null;
+        }
+        return head.value;
+    }
+
+    public T getTail() {
+        if (tail == null) {
+            return null;
+        }
+        return tail.value;
+    }
+
     public void addFront(T item)
     {
         // добавление в голову
         Node<T> node = head;
-        head = new Node<>(item);
-        if (head != null) {
+        if (head == null) {
+            head = new Node<>(item);
+            tail = head;
+        } else {
+            head = new Node<>(item);
             head.next = node;
         }
 
@@ -61,16 +78,14 @@ public class Deque<T>
             return null;
         }
 
-        if (head == tail) {
-            value = head.value;
-            head = null;
-            tail = null;
-            return value;
-        }
-
         while (node != null) {
             if (node == tail) {
                 value = tail.value;
+                if (head == tail) {
+                    head = null;
+                    tail = null;
+                    return value;
+                }
                 tail = prev;
                 tail.next = null;
             }
@@ -93,32 +108,53 @@ public class Deque<T>
         return elementCounter; // размер очереди
     }
 
-    /*public void printDeque() {
+    public String printDeque() {
+        String str = "";
         Node<T> node = head;
+        int count = 0;
+
         while (node != null) {
-            System.out.println(node.value);
+            str += node.value;
+            count++;
+            if (count < size()) {
+                str += ", ";
+            }
             node = node.next;
         }
+
+        return "[" + str + "]";
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         Deque<Integer> deque = new Deque<>();
         deque.addTail(1);
         //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
-        deque.addTail(2);
+        //deque.addTail(2);
         //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
         //System.out.println("Size " + deque.size());
         //deque.printDeque();
 
-        deque.addFront(10);
+        //deque.addFront(10);
         //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
         //deque.printDeque();
         //System.out.println("Size " + deque.size());
+
+        /*deque.removeTail();
+        deque.printDeque();
+        System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
+        System.out.println("Size " + deque.size());
 
         deque.removeTail();
         deque.printDeque();
         System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
         System.out.println("Size " + deque.size());
+
+        System.out.println(deque.removeTail());
+        //deque.printDeque();
+        //System.out.println("Head: " + deque.head.value + " Tail: " + deque.tail.value);
+        System.out.println("Size " + deque.size());
+
+
     } */
 
     private class Node<T> {
