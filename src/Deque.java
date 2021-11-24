@@ -84,13 +84,13 @@ public class Deque<T>
         return elementCounter; // размер очереди
     }
 
-    public void printDeque() {
+    /*public void printDeque() {
         Node<T> node = head;
         while (node != null) {
             System.out.println(node.value);
             node = node.next;
         }
-    }
+    }*/
 
     private class Node<T> {
         private T value;
