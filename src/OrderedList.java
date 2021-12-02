@@ -50,23 +50,22 @@ public class OrderedList<T>
         Node<T> node = head;
 
             while (node != null && compare(value, node.value) == (_ascending ? 1 : -1)) {
+
+                Node<T> newNode = new Node<>(value);
+                if (node == null) {
+                    newNode.prev = tail;
+                    //tail.next = newNode;
+                    tail = newNode;
+                    tail.next = null;
+                } else {
+                    Node<T> prev = node.prev;
+                    prev.next = newNode;
+                    newNode.prev = prev;
+                    newNode.next = node;
+                    node.prev = newNode;
+                }
                 node = node.next;
             }
-
-            Node<T> newNode = new Node<>(value);
-            if (node == null) {
-                newNode.prev = tail;
-                //tail.next = newNode;
-                tail = newNode;
-                tail.next = null;
-            } else {
-                Node<T> prev = node.prev;
-                prev.next = newNode;
-                newNode.prev = prev;
-                newNode.next = node;
-                node.prev = newNode;
-            }
-
     }
 
     public Node<T> find(T val)
