@@ -48,38 +48,51 @@ public class OrderedList<T>
         // автоматическая вставка value
         // в нужную позицию
         Node<T> node = head;
-
+        Node<T> newNode = new Node<>(value);
+        if (head == null) {
+            head = newNode;
+            tail = head;
+        } else {
             while (node != null && compare(value, node.value) == (_ascending ? 1 : -1)) {
-
-                Node<T> newNode = new Node<>(value);
-                if (node == null) {
-                    newNode.prev = tail;
-                    //tail.next = newNode;
-                    tail = newNode;
-                    tail.next = null;
+                node = node.next;
+            }
+            if (node == null) {
+                newNode.prev = tail;
+                tail.next = newNode;
+                tail = newNode;
+                tail.next = null;
+            } else {
+                Node<T> prev = node.prev;
+                if (prev == null) {
+                    head = newNode;
+                    head.next = node;
+                    node.prev = newNode;
                 } else {
-                    Node<T> prev = node.prev;
                     prev.next = newNode;
                     newNode.prev = prev;
                     newNode.next = node;
                     node.prev = newNode;
                 }
-                node = node.next;
+
             }
+        }
     }
 
     public Node<T> find(T val)
     {
-        Node node = head;
+        Node<T> node = head;
         while (node != null) {
             if (node.value == val) {
                 return node;
             }
-            node = node.next;
-            // if (_ascending && compare(node.value, val))
+
+            if (compare(val, node.value) == (_ascending ? 1 : -1)) {
+                node = node.next;
+            } else {
+                break;
+            }
         }
         return null;
-
     }
 
     public void delete(T val)
@@ -92,19 +105,23 @@ public class OrderedList<T>
                 if (head == tail) { // one element in the list
                     head = null;
                     tail = null;
+                    break;
                 }
                 if (node == head) { // remove first element
                     head = node.next;
                     head.prev = null;
+                    break;
                 }
                 else if (node == tail) { // remove last element
                     tail = prev;
                     tail.next = null;
                     tail.prev = prev.prev;
+                    break;
                 }
                 else {
                     prev.next = node.next;
                     node.next.prev = prev;
+                    break;
                 }
             }
             else {
@@ -145,6 +162,20 @@ public class OrderedList<T>
         }
         return r;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        Node<T> node = head;
+
+        while (node != null) {
+            str += node.value;
+            str += ", ";
+            node = node.next;
+        }
+        return "[" + str + "]";
+    }
+
 
     /*public static void main(String[] args) {
         OrderedList<Integer> orderedList = new OrderedList<>(true);
