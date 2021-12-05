@@ -37,7 +37,11 @@ public class OrderedList<T>
         if (v1 instanceof String && v2 instanceof String) {
             String s1 = (String) v1;
             String s2 = (String) v2;
-            return s1.trim().compareTo(s2.trim());
+            if (s1.trim().compareTo(s2.trim()) > 0) {
+                return 1;
+            } else if (s1.trim().compareTo(s2.trim()) < 0) {
+                return -1;
+            } else return 0;
         }
 
         throw new IllegalArgumentException();
@@ -178,9 +182,11 @@ public class OrderedList<T>
 
 
     /*public static void main(String[] args) {
-        OrderedList<Integer> orderedList = new OrderedList<>(true);
-        orderedList.add(1);
-        orderedList.add(7);
+        OrderedList<String> orderedList = new OrderedList<>(true);
+        orderedList.add("a");
+        orderedList.add("z");
+        System.out.println(orderedList.compare("z", "a"));
+        System.out.println(orderedList.toString());
         orderedList.add(2);
         orderedList.delete(2);
         orderedList.clear(false);
