@@ -83,10 +83,10 @@ public class HashTable
         return -1;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         HashTable hashTable = new HashTable(128, 3);
         System.out.println(hashTable.put("Abc"));
         System.out.println(hashTable.find("Abc"));
         System.out.println(hashTable.put("Abc"));
-    }
+    }*/
 }
