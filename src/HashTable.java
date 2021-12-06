@@ -37,8 +37,13 @@ public class HashTable
         // находит индекс пустого слота для значения, или -1
 
         int slotId = hashFun(value);
+        int round = 1;
 
         while (counter != size) {
+            step = step * round;
+            if (step >= size) {
+               step = 1;
+            }
             for (int i = slotId; i < slots.length; i += step) {
                 if (slots[i] == null) {
                     counter++;
@@ -52,6 +57,7 @@ public class HashTable
                     return i;
                 }
             }
+            round++;
         }
         return -1;
     }
@@ -84,9 +90,12 @@ public class HashTable
     }
 
     /*public static void main(String[] args) {
-        HashTable hashTable = new HashTable(128, 3);
-        System.out.println(hashTable.put("Abc"));
-        System.out.println(hashTable.find("Abc"));
-        System.out.println(hashTable.put("Abc"));
+        int count = 0;
+        HashTable hashTable = new HashTable(18, 3);
+
+        while (count < hashTable.size) {
+            System.out.println(hashTable.put("Ddddd"));
+            count++;
+        }
     }*/
 }
