@@ -5,6 +5,7 @@ public class HashTable
     public int size;
     public int step;
     public String [] slots;
+    int counter = 0;
 
     public HashTable(int sz, int stp)
     {
@@ -37,18 +38,22 @@ public class HashTable
 
         int slotId = hashFun(value);
 
+        while (counter != size) {
             for (int i = slotId; i < slots.length; i += step) {
-                if (slots[slotId] == null) {
-                    return slotId;
+                if (slots[i] == null) {
+                    counter++;
+                    return i;
                 }
             }
 
             for (int i = 0; i < slotId; i += step) {
-                if (slots[slotId] == null) {
-                    return slotId;
+                if (slots[i] == null) {
+                    counter++;
+                    return i;
                 }
             }
-            return -1;
+        }
+        return -1;
     }
 
     public int put(String value)
@@ -78,9 +83,10 @@ public class HashTable
         return -1;
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         HashTable hashTable = new HashTable(128, 3);
         System.out.println(hashTable.put("Abc"));
         System.out.println(hashTable.find("Abc"));
-    }*/
+        System.out.println(hashTable.put("Abc"));
+    }
 }
