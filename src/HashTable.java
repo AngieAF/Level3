@@ -39,7 +39,7 @@ public class HashTable
         int slotId = hashFun(value);
         int round = 1;
 
-        while (counter != size) {
+        while (counter <= size) {
             step = step * round;
             if (step >= size) {
                step = 1;
@@ -97,13 +97,7 @@ public class HashTable
     }
 
     /*public static void main(String[] args) {
-        HashTable hashTable = new HashTable(18, 3);
-
-        int count = 0;
-        while (count < hashTable.size + 10) {
+        HashTable hashTable = new HashTable(17, 3);
             System.out.println(hashTable.put("Ddddd"));
-            System.out.println(" Count " + count);
-            count++;
-        }
     }*/
 }
