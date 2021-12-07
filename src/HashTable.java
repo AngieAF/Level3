@@ -44,9 +44,13 @@ public class HashTable
             if (step >= size) {
                step = 1;
             }
+
             for (int i = slotId; i < slots.length; i += step) {
                 if (slots[i] == null) {
                     counter++;
+                    return i;
+                }
+                if (slots[i] == value) {
                     return i;
                 }
             }
@@ -54,6 +58,9 @@ public class HashTable
             for (int i = 0; i < slotId; i += step) {
                 if (slots[i] == null) {
                     counter++;
+                    return i;
+                }
+                if (slots[i] == value) {
                     return i;
                 }
             }
@@ -90,11 +97,12 @@ public class HashTable
     }
 
     /*public static void main(String[] args) {
-        int count = 0;
         HashTable hashTable = new HashTable(18, 3);
 
-        while (count < hashTable.size) {
+        int count = 0;
+        while (count < hashTable.size + 10) {
             System.out.println(hashTable.put("Ddddd"));
+            System.out.println(" Count " + count);
             count++;
         }
     }*/
