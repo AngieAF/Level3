@@ -62,12 +62,12 @@ class NativeDictionary<T>
         return values[hashId];
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         NativeDictionary<Integer> nativeDictionary = new NativeDictionary<>(5, Integer.class);
         nativeDictionary.put("Line 1", 1);
         nativeDictionary.put("Line 2", 2);
         System.out.println(nativeDictionary.isKey("Line 1"));
         System.out.println(nativeDictionary.get("Line 35"));
 
-    }
+    }*/
 }
