@@ -84,7 +84,8 @@ class NativeDictionary<T>
     {
         // гарантированно записываем
         // значение value по ключу key
-        int hashId = seekSlot(key);
+        //int hashId = seekSlot(key);
+        int hashId = hashFun(key);
         if (hashId == -1) {
             throw new RuntimeException("Not enough space");
         }
@@ -108,12 +109,16 @@ class NativeDictionary<T>
 
 
     /*public static void main(String[] args) {
-        NativeDictionary<Integer> nativeDictionary = new NativeDictionary<>(1000, Integer.class);
+        NativeDictionary<Integer> nativeDictionary = new NativeDictionary<>(5, Integer.class);
         nativeDictionary.put("Line 1", 1);
         nativeDictionary.put("Line 2", 2);
+        nativeDictionary.put("Line 2", 3);
+        nativeDictionary.put("Line 3", 4);
+        nativeDictionary.put("Line 4", 5);
+        nativeDictionary.put("Line 5", 6);
         System.out.println(nativeDictionary.isKey("Line 4"));
-        System.out.println(nativeDictionary.get("Line 35"));
+        System.out.println(nativeDictionary.get("Line 1"));
 
-        System.out.println(nativeDictionary);
+
     }*/
 }
