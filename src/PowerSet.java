@@ -79,12 +79,7 @@ public class PowerSet
                 powerSet.put(element);
             }
         }
-
-        for (String element : set2.set) {
-            if (!set.contains(element)) {
-                powerSet.put(element);
-            }
-        }
+        
         return powerSet;
     }
 
@@ -107,7 +102,7 @@ public class PowerSet
         return set.toString();
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         PowerSet set1 = new PowerSet();
         set1.put("A");
         set1.put("B");
@@ -124,8 +119,8 @@ public class PowerSet
         System.out.println(set1.get("D"));
         System.out.println(set1.remove("O"));
 
-        System.out.println(set1.isSubset(set2));
+        System.out.println(set1.difference(set2));
 
 
-    }*/
+    }
 }
