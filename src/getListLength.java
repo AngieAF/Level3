@@ -5,7 +5,6 @@ public class getListLength {
         int length = 0;
         try {
             list1.pop();
-            System.out.println(length);
             return length + getListLength(list1);
         }
 
