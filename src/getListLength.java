@@ -1,15 +1,13 @@
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class getListLength {
-    private int getListLength(LinkedList<Integer> list1) {
-        int length = 0;
+    public int getListLength(LinkedList<Integer> list1) {
         try {
             list1.pop();
-            return length + getListLength(list1);
+        } catch (NoSuchElementException e) {
+            return 0;
         }
-
-        catch (Exception e) {
-            return length;
-        }
+        return 1 + getListLength(list1);
     }
 }
