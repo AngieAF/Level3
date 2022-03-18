@@ -5,8 +5,8 @@ public class printEvenValues {
         if (list.isEmpty()) {
             return;
         }
-        LinkedList listCopy = new LinkedList(list);
-        if ((list.get(0) % 2) == 0) {
+        LinkedList<Integer> listCopy = new LinkedList<>(list);
+        if (listCopy.get(0) % 2 == 0) {
             System.out.println(listCopy.get(0));
         }
         listCopy.remove(0);
