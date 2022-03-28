@@ -1,23 +1,32 @@
 import java.util.LinkedList;
 
 public class SecondMax {
-    private int maxElement(LinkedList<Integer> list, int max1, int max2) {
-        if (list.isEmpty()) {
-            return max1;
-        }
+    private int secondMaxElement(LinkedList<Integer> list) {
         LinkedList<Integer> listCopy = new LinkedList<>(list);
-        if (listCopy.get(0) >= max1 && listCopy.get(0) != max2) {
-            max1 = listCopy.get(0);
-        }
-        listCopy.remove(0);
-        return maxElement(listCopy, max1, max2);
+        int max = getMaxRec(listCopy, list.get(0));
+        boolean isMax2Empty = true;
 
+        int max2 = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (isMax2Empty) {
+                if (list.get(i) != max) {
+                    max2 = list.get(i);
+                    isMax2Empty = false;
+                }
+            } else {
+                if (list.get(i) > max2 && list.get(i) != max) {
+                    max2 = list.get(i);
+                }
+            }
+        }
+        return max2;
     }
 
-    public int secondMaxElement(LinkedList<Integer> list) {
-        int tempMax = maxElement(list, Integer.MIN_VALUE, Integer.MIN_VALUE + 1);
-
-        return maxElement(list, Integer.MIN_VALUE, tempMax);
-
+    private int getMaxRec(LinkedList<Integer> list, int max) {
+        if (list.isEmpty()) {
+            return max;
+        }
+        int value = list.remove(0);
+        return getMaxRec(list, Math.max(value, max));
     }
 }
