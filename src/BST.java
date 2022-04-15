@@ -11,6 +11,8 @@ class BSTNode<T> {
         NodeKey = key;
         NodeValue = val;
         Parent = parent;
+        LeftChild = null;
+        RightChild = null;
     }
 }
 class BSTFind<T> {
@@ -65,18 +67,18 @@ class BST<T> {
         count++;
         return true;
     }
-    public BSTNode<T> FindMinMax(BSTNode<T> FromNode, boolean FindMax) {
+    public BSTNode<T> FinMinMax(BSTNode<T> FromNode, boolean FindMax) {
         if (FindMax) {
             if (FromNode.RightChild == null) {
                 return FromNode;
             } else {
-                return FindMinMax(FromNode.RightChild, FindMax);
+                return FinMinMax(FromNode.RightChild, FindMax);
             }
         } else {
             if (FromNode.LeftChild == null) {
                 return FromNode;
             } else {
-                return FindMinMax(FromNode.LeftChild, FindMax);
+                return FinMinMax(FromNode.LeftChild, FindMax);
             }
         }
     }
